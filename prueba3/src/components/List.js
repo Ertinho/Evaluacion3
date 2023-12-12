@@ -45,15 +45,19 @@ export default function List() {
     <View style = {styles.container}>
       <Text>List of Products</Text>
       {products.map((product, index) => (
-        <View key={index}>
-          <Text >Nombre: {product.name}</Text>
-          <Image source={{uri: product.image}} style={{width: 50, height: 50}} />
-          <Text >Descripción: {product.description}</Text>
-          <Text>Precio: {product.price}</Text>
-          <Text>Cantidad: {product.quantity}</Text>
-          <Text>Estado: {product.status}</Text>
-          <Button title="Edit" onPress={() => handleEdit(product.id)} />
-          <Button title="Delete" onPress={() => handleDelete(product.id)} color="red" />
+        <View key={index} style={styles.productContainer}>
+          <Image source={{uri: product.image}} style={styles.productImage} />
+          <View style={styles.productInfo}>
+            <Text style={styles.productName}>Nombre: {product.name}</Text>
+            <Text style={styles.productDescription}>Descripción: {product.description}</Text>
+            <Text style={styles.productPrice}>Precio: {product.price}</Text>
+            <Text style={styles.productQuantity}>Cantidad: {product.quantity}</Text>
+            <Text style={styles.productStatus}>Estado: {product.status}</Text>
+            <Button title="Edit" onPress={() => handleEdit(product.id)} />
+            <Button title="Delete" onPress={() => handleDelete(product.id)} color="red" />
+          
+          </View>
+          
         </View>
       ))}
     </View>
@@ -63,13 +67,54 @@ export default function List() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: '#f8f8f8'
   },
 
-
+  productContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    elevation: 2
+  },
+  productImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10
+  },
+  productInfo: {
+    flex: 1
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  productDescription: {
+    fontSize: 14,
+    color: '#666'
+  },
+  productPrice: {
+    fontSize: 16,
+    color: '#000'
+  },
+  productQuantity: {
+    fontSize: 14,
+    color: '#666'
+  },
+  productStatus: {
+    fontSize: 14,
+    color: '#666'
+  }
 
 
 })
