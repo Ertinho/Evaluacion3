@@ -62,6 +62,28 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        try {
+
+            $fields=$request->validate([
+                'name' => 'required',
+                'image' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'quantity' => 'required',
+                'status' => 'required'
+            ]);
+            $product->update([
+                'name' => $fields['name'],
+                'image' => $fields['image'],
+                'description' => $fields['description'],
+                'price' => $fields['price'],
+                'quantity' => $fields['quantity'],
+                'status' => $fields['status']
+            ]);
+            return response()->json($product,200);
+        } catch (\Throwable $exception) {
+            throw new \Exception($exception->getMessage());
+        }
     }
 
     /**
